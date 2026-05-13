@@ -1,0 +1,15 @@
+baseURL = "https://mechanicalcolor.com/yawym/"
+languageCode = "en-us"
+title = "yawym"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "A minimal Hugo site."
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[markup.goldmark.renderer]
+  unsafe = true
