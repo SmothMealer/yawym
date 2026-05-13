@@ -50,6 +50,16 @@ git push -u origin main
 
 Use your real default branch name (`main` or `master`) in the Cloudflare steps below.
 
+### Auto-deploy on push to `main`
+
+This repo includes **`.github/workflows/deploy.yml`**, which runs **`npx wrangler deploy`** on every push to **`main`** (and supports **Actions → Run workflow** manually).
+
+1. GitHub repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
+   - **`CLOUDFLARE_API_TOKEN`** — create at Cloudflare **My Profile → API Tokens** with permission **Edit Cloudflare Workers** (or use a custom token that includes Workers write for this account).
+   - **`CLOUDFLARE_ACCOUNT_ID`** — copy from Cloudflare dashboard **Workers & Pages** overview (right-hand column) or any zone’s **Overview** URL.
+
+2. If you **also** connected this repo inside **Cloudflare** for automatic deploys, either **disable** the Cloudflare-side Git build or **remove** this workflow so you do not deploy **twice** on every push.
+
 ---
 
 ## Cloudflare Workers (Wrangler + static assets) — what this repo uses
@@ -170,4 +180,5 @@ export default {
 | `hugo.toml` | Site config; **`baseURL` must match public URL** |
 | `package.json` / `package-lock.json` | CI: `hugo-bin` + `wrangler`; `npm run build` runs Hugo |
 | `wrangler.jsonc` | Workers: static `public/` + `build.command` for Hugo |
+| `.github/workflows/deploy.yml` | Deploy on push to `main` (needs GitHub Action secrets) |
 | `archetypes/default.md` | Front matter for `hugo new` |
