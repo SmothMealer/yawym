@@ -4,6 +4,10 @@ title = "yawym"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
+# Emit files under public/yawym/ so URLs like /yawym/css/... match the Worker asset tree
+# when the site is served at mechanicalcolor.com/yawym (preview: *.workers.dev/yawym/).
+publishDir = "public/yawym"
+
 [params]
   description = "A minimal Hugo site."
 

@@ -17,7 +17,7 @@ npm install
 npx hugo server
 ```
 
-Open the URL Hugo prints (usually `http://localhost:1313/yawym/`).
+Open the URL Hugo prints (with `publishDir` set, that is usually `http://localhost:1313/yawym/`).
 
 **Production build (matches Workers CI):**
 
@@ -62,9 +62,28 @@ This repo includes **`.github/workflows/deploy.yml`**, which runs **`npx wrangle
 
 ---
 
+## Custom domain: `mechanicalcolor.com/yawym` (this Worker)
+
+Your preview URL is **`https://<worker>.<subdomain>.workers.dev/yawym/`** (not the workers.dev **root**), because the built files live under `public/yawym/` to match `/yawym/...` links.
+
+On the zone **mechanicalcolor.com** (DNS already on Cloudflare):
+
+1. Open **Workers & Pages** → select the **yawym** worker (the one with static assets).
+2. Open **Settings** → **Domains & Routes** (or **Triggers** → **Routes**, depending on dashboard version).
+3. Under **Routes**, **Add route**:
+   - **`mechanicalcolor.com/yawym*`**  
+   If visitors use **`www`**, also add **`www.mechanicalcolor.com/yawym*`** (and keep `hugo.toml` `baseURL` consistent with the hostname you actually use).
+4. Save. Cloudflare attaches the route to this worker; HTTPS uses your existing zone certificate.
+
+**If another Worker already handles `mechanicalcolor.com/*`:** the **more specific** route `mechanicalcolor.com/yawym*` should still hit this worker, but if you see the wrong worker, merge routes or adjust order in the dashboard / wrangler `routes` config.
+
+**If the apex is a normal origin (not a Worker) for `/`:** this route only intercepts **`/yawym...`**; the rest of the site is unchanged.
+
+---
+
 ## Cloudflare Workers (Wrangler + static assets) — what this repo uses
 
-If you connected the repo as a **Worker** with **static assets**, Cloudflare runs **`npx wrangler deploy`**. Wrangler then runs the **build command** from `wrangler.jsonc` before uploading the `public/` folder.
+If you connected the repo as a **Worker** with **static assets**, Cloudflare runs **`npx wrangler deploy`**. Wrangler then runs the **build command** from `wrangler.jsonc` before uploading the `public/` folder (site files are under **`public/yawym/`** after the Hugo build).
 
 **Why `npx hugo` failed:** there is no npm package named `hugo` that installs a CLI that way, so npm prints *“could not determine executable to run”*.
 
@@ -177,7 +196,7 @@ export default {
 | `content/posts/.../index.md` | Post + co-located images (page bundle) |
 | `static/` | Files copied to site root (`static/css/` → `/yawym/css/` when deployed) |
 | `layouts/` | HTML templates |
-| `hugo.toml` | Site config; **`baseURL` must match public URL** |
+| `hugo.toml` | Site config; **`baseURL` must match public URL**; **`publishDir`** emits `public/yawym/` for subpath hosting |
 | `package.json` / `package-lock.json` | CI: `hugo-bin` + `wrangler`; `npm run build` runs Hugo |
 | `wrangler.jsonc` | Workers: static `public/` + `build.command` for Hugo |
 | `.github/workflows/deploy.yml` | Deploy on push to `main` (needs GitHub Action secrets) |
