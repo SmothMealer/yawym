@@ -4,13 +4,26 @@ Minimal [Hugo](https://gohugo.io/) static site for **https://mechanicalcolor.com
 
 ## Local preview
 
-Install Hugo (e.g. `brew install hugo`) or use the same version as Cloudflare (see below), then:
+**Option A — Hugo on your PATH** (e.g. `brew install hugo`):
 
 ```bash
 hugo server
 ```
 
+**Option B — same Hugo as CI** (uses `hugo-bin` from this repo):
+
+```bash
+npm install
+npx hugo server
+```
+
 Open the URL Hugo prints (usually `http://localhost:1313/yawym/`).
+
+**Production build (matches Workers CI):**
+
+```bash
+npm ci && npm run build
+```
 
 ## New posts
 
@@ -36,6 +49,25 @@ git push -u origin main
 ```
 
 Use your real default branch name (`main` or `master`) in the Cloudflare steps below.
+
+---
+
+## Cloudflare Workers (Wrangler + static assets) — what this repo uses
+
+If you connected the repo as a **Worker** with **static assets**, Cloudflare runs **`npx wrangler deploy`**. Wrangler then runs the **build command** from `wrangler.jsonc` before uploading the `public/` folder.
+
+**Why `npx hugo` failed:** there is no npm package named `hugo` that installs a CLI that way, so npm prints *“could not determine executable to run”*.
+
+**Fix in this repo:** `package.json` includes **`hugo-bin`** (ships the real Hugo binary). The build is:
+
+1. `npm ci` — install `hugo-bin` and `wrangler`
+2. `npm run build` — runs `hugo --minify --gc` → writes `public/`
+
+That is configured in **`wrangler.jsonc`** under `build.command`. Commit **`package.json`** and **`package-lock.json`** with the rest of the site.
+
+**Dashboard check:** in the Worker project → **Settings** → **Build**, clear any extra **Build command** that still says `npx hugo` so Wrangler uses the repo’s `wrangler.jsonc` (or set it explicitly to `npm ci && npm run build` if you override there).
+
+**Deploy command** should stay **`npx wrangler deploy`** (or `npm exec wrangler deploy` after `npm ci`).
 
 ---
 
@@ -136,4 +168,6 @@ export default {
 | `static/` | Files copied to site root (`static/css/` → `/yawym/css/` when deployed) |
 | `layouts/` | HTML templates |
 | `hugo.toml` | Site config; **`baseURL` must match public URL** |
+| `package.json` / `package-lock.json` | CI: `hugo-bin` + `wrangler`; `npm run build` runs Hugo |
+| `wrangler.jsonc` | Workers: static `public/` + `build.command` for Hugo |
 | `archetypes/default.md` | Front matter for `hugo new` |
