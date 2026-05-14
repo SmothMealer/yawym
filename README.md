@@ -4,20 +4,33 @@ Minimal [Hugo](https://gohugo.io/) static site for **https://mechanicalcolor.com
 
 ## Local preview
 
-**Option A — Hugo on your PATH** (e.g. `brew install hugo`):
+This site’s production `baseURL` is under **`/yawym/`**. All in-page links use that prefix (`/yawym/posts/...`, `/yawym/css/...`). If you start plain `hugo server` and open only **`http://localhost:1313/`** (without `/yawym/`), the home page is not served there, and following links can hit URLs Hugo is not serving—often an empty or broken page in the browser.
+
+**Recommended — flat URLs on localhost** (matches opening `http://localhost:1313/`):
 
 ```bash
-hugo server
+npm install
+npm run dev
 ```
 
-**Option B — same Hugo as CI** (uses `hugo-bin` from this repo):
+Then open **`http://127.0.0.1:1313/`** (or `http://localhost:1313/`). Posts work at **`/posts/...`** for this session only; production `baseURL` in `hugo.toml` is unchanged.
+
+**Option A — Hugo on your PATH** (e.g. `brew install hugo`), same idea:
+
+```bash
+hugo server -D --port 1313 --bind 127.0.0.1 --appendPort=false --baseURL http://127.0.0.1:1313/
+```
+
+**Option B — match production paths** (no `--baseURL` override):
 
 ```bash
 npm install
 npx hugo server
 ```
 
-Open the URL Hugo prints (with `publishDir` set, that is usually `http://localhost:1313/yawym/`).
+Open the URL Hugo prints (with `publishDir` set, that is usually **`http://localhost:1313/yawym/`**), not the server root alone.
+
+**Previewing a built folder with another static server:** serve the whole **`public/`** directory (Wrangler’s asset root), then open **`http://localhost:<port>/yawym/`**. Do not point the server’s document root at **`public/yawym/`** only: links start with `/yawym/...`, so the browser would request `/yawym/...` from your host and you would need that extra `yawym` segment in the filesystem path.
 
 **Production build (matches Workers CI):**
 
@@ -90,7 +103,7 @@ If you connected the repo as a **Worker** with **static assets**, Cloudflare run
 **Fix in this repo:** `package.json` includes **`hugo-bin`** (ships the real Hugo binary). The build is:
 
 1. `npm ci` — install `hugo-bin` and `wrangler`
-2. `npm run build` — runs `hugo --minify --gc` → writes `public/`
+2. `npm run build` — runs `hugo --minify --gc` → writes the site under **`public/yawym/`** (see `publishDir` in `hugo.toml`) so URL paths like `/yawym/css/...` match the Worker asset tree.
 
 That is configured in **`wrangler.jsonc`** under `build.command`. Commit **`package.json`** and **`package-lock.json`** with the rest of the site.
 
