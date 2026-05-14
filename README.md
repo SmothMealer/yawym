@@ -65,13 +65,31 @@ Use your real default branch name (`main` or `master`) in the Cloudflare steps b
 
 ### Auto-deploy on push to `main`
 
-This repo includes **`.github/workflows/deploy.yml`**, which runs **`npx wrangler deploy`** on every push to **`main`** (and supports **Actions → Run workflow** manually).
+**Cloudflare does not see your GitHub pushes by default.** Deploys are triggered by **GitHub Actions** (`.github/workflows/deploy.yml`). That job calls **`npx wrangler deploy`**, which needs API credentials stored as **repository secrets**.
 
-1. GitHub repo → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**:
-   - **`CLOUDFLARE_API_TOKEN`** — create at Cloudflare **My Profile → API Tokens** with permission **Edit Cloudflare Workers** (or use a custom token that includes Workers write for this account).
-   - **`CLOUDFLARE_ACCOUNT_ID`** — copy from Cloudflare dashboard **Workers & Pages** overview (right-hand column) or any zone’s **Overview** URL.
+#### One-time setup (required)
 
-2. If you **also** connected this repo inside **Cloudflare** for automatic deploys, either **disable** the Cloudflare-side Git build or **remove** this workflow so you do not deploy **twice** on every push.
+1. Open your repo on GitHub → **Settings** → **Secrets and variables** → **Actions**.
+2. **New repository secret** (exact names):
+
+   | Name | Value |
+   |------|--------|
+   | **`CLOUDFLARE_API_TOKEN`** | Cloudflare → profile icon (top right) → **My Profile** → **API Tokens** → **Create Token** → use template **Edit Cloudflare Workers** (or create a custom token with **Account** → **Workers Scripts** → **Edit** and **Account** → **Workers KV Storage** / **Workers R2** if you add those later). Copy the token once; GitHub stores it as a secret. |
+   | **`CLOUDFLARE_ACCOUNT_ID`** | Cloudflare dashboard → **Workers & Pages** → right sidebar **Account ID** (or any zone **Overview** → **Account ID** in the API section). |
+
+3. Confirm **Actions** are allowed: repo **Settings** → **Actions** → **General** → **Actions permissions** → *Allow all actions and reusable workflows* (or your org’s equivalent).
+
+4. Push to **`main`** again, or open **Actions** → **Deploy to Cloudflare Workers** → **Run workflow** → **Run workflow**.
+
+5. Open **Actions** and click the latest run. If it failed, open the job log; if secrets were missing, the first step should now say to add **`CLOUDFLARE_API_TOKEN`** and **`CLOUDFLARE_ACCOUNT_ID`**.
+
+#### Optional: confirm it ran
+
+After a green run, reload **`https://<your-worker>.workers.dev/yawym/`** (or your custom domain) and check that new content appears.
+
+#### If you also use Cloudflare “Connect to Git”
+
+If this repo is **also** connected inside **Cloudflare** for automatic deploys, either **disable** the Cloudflare-side Git build or **remove** this workflow so you do not deploy **twice** on every push.
 
 ---
 
