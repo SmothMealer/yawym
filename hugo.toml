@@ -2,7 +2,7 @@ baseURL = "https://mechanicalcolor.com/yawym/"
 languageCode = "en-us"
 title = "yawym"
 enableRobotsTXT = true
-disableKinds = ["taxonomy", "term"]
+disableKinds = ["taxonomy", "term", "section"]
 
 # Emit files under public/yawym/ so URLs like /yawym/css/... match the Worker asset tree
 # when the site is served at mechanicalcolor.com/yawym (preview: *.workers.dev/yawym/).
@@ -13,7 +13,6 @@ publishDir = "public/yawym"
 
 [outputs]
   home = ["HTML", "RSS"]
-  section = ["HTML", "RSS"]
 
 [markup.goldmark.renderer]
   unsafe = true

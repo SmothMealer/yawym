@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "hugo --minify --gc",
-    "dev": "hugo server -D --port 1313 --bind 127.0.0.1 --appendPort=false --baseURL http://127.0.0.1:1313/"
+    "dev": "hugo server -D --port 1313 --bind 127.0.0.1",
+    "dev:flat": "hugo server -D --port 1313 --bind 127.0.0.1 --appendPort=false --baseURL http://localhost:1313/"
   },
   "devDependencies": {
     "hugo-bin": "0.149.2",

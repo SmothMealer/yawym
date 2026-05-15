@@ -4,31 +4,39 @@ Minimal [Hugo](https://gohugo.io/) static site for **https://mechanicalcolor.com
 
 ## Local preview
 
-This site’s production `baseURL` is under **`/yawym/`**. All in-page links use that prefix (`/yawym/posts/...`, `/yawym/css/...`). If you start plain `hugo server` and open only **`http://localhost:1313/`** (without `/yawym/`), the home page is not served there, and following links can hit URLs Hugo is not serving—often an empty or broken page in the browser.
+This site’s production `baseURL` is under **`/yawym/`**. In-page links use that prefix (e.g. **`/yawym/hello-world/`**, **`/yawym/css/...`**). If you start plain `hugo server` and open only **`http://localhost:1313/`** (without `/yawym/`), the home page is not served there, and following links can hit URLs Hugo is not serving—often an empty or broken page in the browser.
 
-**Recommended — flat URLs on localhost** (matches opening `http://localhost:1313/`):
+**Recommended — same paths as production** (`/yawym/...` links work as-is):
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open **`http://127.0.0.1:1313/`** (or `http://localhost:1313/`). Posts work at **`/posts/...`** for this session only; production `baseURL` in `hugo.toml` is unchanged.
+Then open **`http://localhost:1313/yawym/`** (Hugo prints this URL on startup). The server uses `baseURL` from `hugo.toml` with the port appended.
 
-**Option A — Hugo on your PATH** (e.g. `brew install hugo`), same idea:
+**Flat URLs on localhost** (home at **`http://localhost:1313/`** only; **`/yawym/`** is not served):
 
 ```bash
-hugo server -D --port 1313 --bind 127.0.0.1 --appendPort=false --baseURL http://127.0.0.1:1313/
+npm run dev:flat
 ```
 
-**Option B — match production paths** (no `--baseURL` override):
+Posts appear at **`/<slug>/...`** for that session only (no `/yawym/` prefix in the path); production `baseURL` in `hugo.toml` is unchanged.
+
+**Option A — Hugo on your PATH** (e.g. `brew install hugo`), flat URLs:
+
+```bash
+hugo server -D --port 1313 --bind 127.0.0.1 --appendPort=false --baseURL http://localhost:1313/
+```
+
+**Option B — match production paths** (same as `npm run dev`):
 
 ```bash
 npm install
-npx hugo server
+npx hugo server -D --port 1313 --bind 127.0.0.1
 ```
 
-Open the URL Hugo prints (with `publishDir` set, that is usually **`http://localhost:1313/yawym/`**), not the server root alone.
+Open the URL Hugo prints (with `publishDir` set, that is **`http://localhost:1313/yawym/`**), not the server root alone.
 
 **Previewing a built folder with another static server:** serve the whole **`public/`** directory (Wrangler’s asset root), then open **`http://localhost:<port>/yawym/`**. Do not point the server’s document root at **`public/yawym/`** only: links start with `/yawym/...`, so the browser would request `/yawym/...` from your host and you would need that extra `yawym` segment in the filesystem path.
 
@@ -41,10 +49,10 @@ npm ci && npm run build
 ## New posts
 
 ```bash
-hugo new posts/my-topic/index.md
+hugo new my-topic/index.md
 ```
 
-Use a **page bundle** (`posts/name/index.md` + images beside it) so images stay next to the post.
+Use a **page bundle** (`content/<slug>/index.md` + images beside it) so images stay next to the post. Each post’s front matter should include **`type: post`** (the default archetype sets this) so it appears on the home list and uses the post layout.
 
 ---
 
@@ -214,7 +222,7 @@ export default {
 ## Checklist after first deploy
 
 - Open **https://mechanicalcolor.com/yawym/** — home loads, CSS loads.
-- Open **https://mechanicalcolor.com/yawym/posts/hello-world/** — sample post and SVG image load.
+- Open **https://mechanicalcolor.com/yawym/hello-world/** — sample post and SVG image load.
 - Open **https://mechanicalcolor.com/yawym/index.xml** — RSS (for aggregators / future newsletter tooling).
 
 ---
@@ -223,8 +231,8 @@ export default {
 
 | Path | Role |
 |------|------|
-| `content/` | Markdown pages; posts under `content/posts/` |
-| `content/posts/.../index.md` | Post + co-located images (page bundle) |
+| `content/_index.md` | Home page |
+| `content/<slug>/index.md` | Post page bundle (`type: post`); URL is `/yawym/<slug>/` |
 | `static/` | Files copied to site root (`static/css/` → `/yawym/css/` when deployed) |
 | `layouts/` | HTML templates |
 | `hugo.toml` | Site config; **`baseURL` must match public URL**; **`publishDir`** emits `public/yawym/` for subpath hosting |

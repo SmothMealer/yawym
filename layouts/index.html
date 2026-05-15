@@ -1,19 +1,12 @@
 {{ define "main" }}
-<article class="home">
-  <div class="content">
-    {{ .Content }}
-  </div>
-  <section class="recent">
-    <h2>Recent posts</h2>
-    <ul class="post-list">
-      {{- range where site.RegularPages "Section" "posts" | first 10 -}}
-      <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-      </li>
-      {{- end -}}
-    </ul>
-    <p class="more"><a href="{{ "posts/" | relURL }}">All posts →</a></p>
-  </section>
-</article>
+<p>You are what you make.</p>
+<ul>
+{{ range sort (where site.RegularPages "Type" "post") "Date" "desc" }}
+<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> ({{ .Date.Format "January 2, 2006" }})</li>
+{{ end }}
+</ul>
+<p><a href="mailto:adam@mechanicalcolor.com">adam@mechanicalcolor.com</a></p>
+{{- with site.Home.OutputFormats.Get "RSS" -}}
+<p><a href="{{ .RelPermalink }}">RSS</a></p>
+{{- end -}}
 {{ end }}

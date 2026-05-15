@@ -1,132 +1,30 @@
-:root {
-  color-scheme: light dark;
-  --fg: #111;
-  --bg: #fafafa;
-  --muted: #555;
-  --accent: #0b57d0;
-  --border: #ddd;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fg: #eee;
-    --bg: #121212;
-    --muted: #aaa;
-    --accent: #8ab4f8;
-    --border: #333;
-  }
-}
-
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  border: none;
+}
+
+html {
+  color-scheme: light dark;
 }
 
 body {
-  margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
-  line-height: 1.6;
-  color: var(--fg);
-  background: var(--bg);
+  margin: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  background: #fff;
+  color: #000;
 }
 
-.site-header,
-.site-footer {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #000;
+    color: #fff;
+  }
 }
 
-.site-footer {
-  border-top: 1px solid var(--border);
-  border-bottom: none;
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.site-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.site-title {
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--fg);
-}
-
-.site-nav {
-  display: flex;
-  gap: 1rem;
-}
-
-.site-nav a {
-  color: var(--accent);
-}
-
-.site-main {
-  max-width: 42rem;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
-}
-
-.page-header h1 {
-  margin: 0 0 0.5rem;
-  line-height: 1.2;
-}
-
-.meta {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-.page-intro {
-  color: var(--muted);
-  margin-bottom: 1.5rem;
-}
-
-.content :first-child {
-  margin-top: 0;
-}
-
-.content img {
+article img {
   max-width: 100%;
   height: auto;
-}
-
-.post-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-list li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.75rem 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.post-list a {
-  flex: 1 1 12rem;
-  color: var(--accent);
-}
-
-.post-list time {
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-.more {
-  margin-top: 1.5rem;
-}
-
-.more a {
-  color: var(--accent);
 }

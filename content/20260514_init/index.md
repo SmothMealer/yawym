@@ -1,0 +1,30 @@
+---
+title: "You are what you make."
+date: 2026-05-14
+draft: false
+type: post
+---
+
+Joel Gundlach, my industrial design professor at CCAD, said "you are what you make." It stuck with me. 
+
+Mr. Gundlach, the consummate craftsman. He expected sharp blades, crisp edges, tight tolerances, and no nonsense.
+
+At the end of term he had us all over to test our corrugated cardboard boats in his pond. (We fit maybe twenty college students into a single "barge" before it finally--and catastrophically--imploded.)
+
+He showed us his gorgeous hand-built home. An old farmhouse he painstakingly repaired, rebuilt, and expanded. We saw the meticulously crafted white foam core scale model he had built as a planning exercise for the renovation he had been diligently implementing year after year.
+
+He had designed and built his wood stove above grade directly next to the garage. That way he could pass wood through a small door by the wood pile directly to the staging area while in an ergonomic standing position.
+
+Every hinge in his house was utterly silent, and every door closed with a touch and quiet, precise, perfect click.
+
+He said that his wife told him he couldn't buy a tool unless he used it for a job that paid enough to cover the cost. Of course he'd done cabinetry and model making jobs to buy his wood shop. But somehow he'd also managed to buy a backhoe on the same principle.
+
+Once, in class, Joel criticized the poor craftsmanship of my model. With the characteristic blind arrogance of my twenty-year-old self, I spat back that I simply _didn't like building models._
+
+"That's because you only like doing things you're good at."
+
+Smack between the eyes. He was obviously annoyed with me--anyone would be; I was insufferable--but the words he chose were exactly like his craft. Measured, direct, razor sharp, and always constructive.
+
+I think of Mr. Gundlach every time I teach a class. I tried my best to channel him during my brief stint teaching at OTIS. I recently helped with a workshop at ArtCenter and was reminded again of how much his words have affected my life and teaching philosophy. I even think of him when I'm teaching my kids to care that the dados are tight when they help me with carpentry jobs around the house.
+
+I seriously doubt that Mr. Gundlach knew the impact he was having at the time. But I hope he did have some inkling that his work mattered. It did to me.

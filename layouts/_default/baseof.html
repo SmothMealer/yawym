@@ -9,25 +9,11 @@
   <meta name="description" content="{{ . }}">
   {{- end -}}
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
-  {{- with .OutputFormats.Get "RSS" -}}
+  {{- with site.Home.OutputFormats.Get "RSS" -}}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
   {{- end -}}
 </head>
 <body>
-  <header class="site-header">
-    <a class="site-title" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
-    <nav class="site-nav">
-      <a href="{{ "posts/" | relURL }}">Posts</a>
-      {{- with (.OutputFormats.Get "RSS") -}}
-      <a href="{{ .Permalink }}">RSS</a>
-      {{- end -}}
-    </nav>
-  </header>
-  <main class="site-main">
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer class="site-footer">
-    <p>Built with Hugo.</p>
-  </footer>
+  {{ block "main" . }}{{ end }}
 </body>
 </html>

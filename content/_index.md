@@ -1,5 +1,3 @@
 ---
-title: Home
+title: yawym
 ---
-
-Welcome. This site is built with [Hugo](https://gohugo.io/) and lives at `/yawym` on mechanicalcolor.com.
