@@ -1,10 +1,7 @@
 {{ define "main" }}
-<p>You are what you make.</p>
-<ul>
 {{ range sort (where site.RegularPages "Type" "post") "Date" "desc" }}
-<li><a href="{{ .RelPermalink }}">{{ .Title }}</a> ({{ .Date.Format "January 2, 2006" }})</li>
+<a href="{{ .RelPermalink }}">{{ .Title }}</a> <small>{{ .Date.Format "2006-01-02" }}</small><br />
 {{ end }}
-</ul>
 <p><a href="mailto:adam@mechanicalcolor.com">adam@mechanicalcolor.com</a></p>
 {{- with site.Home.OutputFormats.Get "RSS" -}}
 <p><a href="{{ .RelPermalink }}">RSS</a></p>

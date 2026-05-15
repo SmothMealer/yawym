@@ -1,11 +1,13 @@
 {{ define "main" }}
 {{ if eq .Type "post" }}
+<article class="post">
 <p><a href="{{ site.Home.RelPermalink }}">&#171; All Posts</a></p>
-{{ .Content }}
 {{- if not .Date.IsZero -}}
-<p>{{ .Date.Format "January 2, 2006" }}</p>
+<small>{{ .Date.Format "2006-01-02" }}</small>
 {{- end -}}
+{{ .Content }}
 <p><a href="mailto:adam@mechanicalcolor.com">adam@mechanicalcolor.com</a></p>
+</article>
 {{ else }}
 <h1>{{ .Title }}</h1>
 {{ .Content }}

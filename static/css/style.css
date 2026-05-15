@@ -11,10 +11,17 @@ html {
 
 body {
   margin: 1rem;
-  font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   background: #fff;
   color: #000;
+}
+
+a:link {
+  color: LinkText;
+}
+
+a:visited {
+  color: VisitedText;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,4 +34,8 @@ body {
 article img {
   max-width: 100%;
   height: auto;
+}
+
+.post {
+  max-width: 600px;
 }

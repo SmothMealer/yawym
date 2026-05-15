@@ -7,19 +7,19 @@ type: post
 
 Joel Gundlach, my industrial design professor at CCAD, said "you are what you make." It stuck with me. 
 
-Mr. Gundlach, the consummate craftsman. He expected sharp blades, crisp edges, tight tolerances, and no nonsense.
+Mr. Gundlach, the consummate craftsman, expected sharp blades, crisp edges, tight tolerances, and no nonsense.
 
 At the end of term he had us all over to test our corrugated cardboard boats in his pond. (We fit maybe twenty college students into a single "barge" before it finally--and catastrophically--imploded.)
 
 He showed us his gorgeous hand-built home. An old farmhouse he painstakingly repaired, rebuilt, and expanded. We saw the meticulously crafted white foam core scale model he had built as a planning exercise for the renovation he had been diligently implementing year after year.
 
-He had designed and built his wood stove above grade directly next to the garage. That way he could pass wood through a small door by the wood pile directly to the staging area while in an ergonomic standing position.
+He had designed and built his wood stove above grade directly next to the garage. That way he could pass wood through a small door by the wood pile directly to the staging area from an ergonomic standing position.
 
-Every hinge in his house was utterly silent, and every door closed with a touch and quiet, precise, perfect click.
+Every hinge in his house was utterly silent. Every door closed with a touch and quiet, precise, perfect click.
 
 He said that his wife told him he couldn't buy a tool unless he used it for a job that paid enough to cover the cost. Of course he'd done cabinetry and model making jobs to buy his wood shop. But somehow he'd also managed to buy a backhoe on the same principle.
 
-Once, in class, Joel criticized the poor craftsmanship of my model. With the characteristic blind arrogance of my twenty-year-old self, I spat back that I simply _didn't like building models._
+Once, in class, Joel criticized the poor craftsmanship of my model. With the typical blind arrogance of my twenty-year-old self, I spat back that I simply _didn't like building models._
 
 "That's because you only like doing things you're good at."
 
