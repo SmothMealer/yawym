@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>yawym</title>
+    <link>https://mechanicalcolor.com/</link>
+    <description>You Are What You Make</description>
+    <item>
+      <title>The simplest thing that can work</title>
+      <link>https://mechanicalcolor.com/2026-05-29-i-wanna-new-blog.html</link>
+      <guid>https://mechanicalcolor.com/2026-05-29-i-wanna-new-blog.html</guid>
+      <pubDate>Thu, 29 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[I'm starting a project. I'll write about it here. Here's why.]]></description>
+    </item>
+    <item>
+      <title>You are what you make</title>
+      <link>https://mechanicalcolor.com/2026-05-14-you-are-what-you-make.html</link>
+      <guid>https://mechanicalcolor.com/2026-05-14-you-are-what-you-make.html</guid>
+      <pubDate>Wed, 14 May 2026 00:00:00 GMT</pubDate>
+      <description><![CDATA[Joel Gundlach, my industrial design professor at CCAD, said "you are what you make." ]]></description>
+    </item>
+  </channel>
+</rss>
