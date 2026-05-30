@@ -1,9 +1,0 @@
-{{ define "main" }}
-{{ range sort (where site.RegularPages "Type" "post") "Date" "desc" }}
-<a href="{{ .RelPermalink }}">{{ .Title }}</a> <small>{{ .Date.Format "2006-01-02" }}</small><br />
-{{ end }}
-<p><a href="mailto:adam@mechanicalcolor.com">adam@mechanicalcolor.com</a></p>
-{{- with site.Home.OutputFormats.Get "RSS" -}}
-<p><a href="{{ .RelPermalink }}">RSS</a></p>
-{{- end -}}
-{{ end }}
