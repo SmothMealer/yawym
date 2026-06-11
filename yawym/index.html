@@ -2,17 +2,38 @@
 <html lang="en">
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>yawym</title>
 <link rel="alternate" type="application/rss+xml" title="yawym" href="feed.xml">
 
 <style>
-  :root { color-scheme: light dark; }
-  p { max-width: 40em; }
+  html {
+    color-scheme: light dark;
+    --bg: #fff;
+    --text: #212121;
+    --accent: #ff3399;
+    font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+      "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.618;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    overflow-wrap: break-word;
+  }
+  @media (prefers-color-scheme: dark) {
+    html { --bg: #212121; --text: #dcdcdc; }
+  }
+  a, a:visited { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { padding-left: 2rem; }
 </style>
 
-<p>
-  Hi. I'm Adam.
-</p>
+<h1>
+  May name is Adam.
+</h1>
 
 <p>
   I make things. I teach other people to make things. I make tools to help people make things.
@@ -23,6 +44,7 @@
 </p>
 
 <p>
+  <a href="2026-06-10-helping-ralph-focus.html">Helping Ralph focus</a> 2026-06-10<br />
   <a href="2026-06-06-hare-brained.html">Hare Brained</a> 2026-06-06<br />
   <a href="2026-05-29-the-simplest-thing-that-can-work.html">The simplest thing that can work</a> 2026-05-29<br />
   <a href="2026-05-14-you-are-what-you-make.html">You are what you make</a> 2026-05-14<br />

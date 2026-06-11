@@ -16,12 +16,34 @@ SIGNATURE_EMAIL = "adam@mechanicalcolor.com"
 
 STYLE_BLOCK = """\
 <style>
-  :root { color-scheme: light dark; }
-  p { max-width: 40em; }
+  html {
+    color-scheme: light dark;
+    --bg: #fff;
+    --text: #212121;
+    --accent: #ff3399;
+    font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+      "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.618;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 45rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+    overflow-wrap: break-word;
+  }
+  @media (prefers-color-scheme: dark) {
+    html { --bg: #212121; --text: #dcdcdc; }
+  }
+  a, a:visited { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul, ol { padding-left: 2rem; }
 </style>"""
 
 LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
+UL_ITEM_RE = re.compile(r"^[-*+]\s+(.*)$")
+OL_ITEM_RE = re.compile(r"^\d+[.)]\s+(.*)$")
 
 
 def slugify(title: str) -> str:
@@ -59,6 +81,24 @@ def format_paragraph(block: str) -> str:
         inner = "\n".join(inner_parts)
 
     return f"<p>\n{inner}\n</p>"
+
+
+def format_list(block: str) -> str | None:
+    lines = [line.strip() for line in block.split("\n") if line.strip()]
+    if lines and all(UL_ITEM_RE.match(line) for line in lines):
+        tag, item_re = "ul", UL_ITEM_RE
+    elif lines and all(OL_ITEM_RE.match(line) for line in lines):
+        tag, item_re = "ol", OL_ITEM_RE
+    else:
+        return None
+
+    items = [item_re.match(line).group(1).strip() for line in lines]
+    inner = "\n".join(f"  <li>{convert_inline(item)}</li>" for item in items)
+    return f"<{tag}>\n{inner}\n</{tag}>"
+
+
+def format_block(block: str) -> str:
+    return format_list(block) or format_paragraph(block)
 
 
 def parse_markdown(text: str) -> tuple[str, list[str]]:
@@ -111,7 +151,7 @@ def build_html(title: str, post_date: date, paragraphs: list[str]) -> str:
     ]
 
     for paragraph in paragraphs:
-        body.append(format_paragraph(paragraph))
+        body.append(format_block(paragraph))
         body.append("")
 
     body.extend(
